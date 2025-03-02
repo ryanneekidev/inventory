@@ -9,10 +9,11 @@ const path = require('node:path');
 app.set("views", path.join(__dirname, "..", "views"));
 app.set("view engine", "ejs");
 
+// Import controllers
+const itemsController = require('../controllers/itemsController');
+
 // Routes
-app.get('/', (req, res)=>{
-    res.status(200).render('items', {items: items})
-});
+app.get('/', itemsController.getUsers);
 
 // Export router
 module.exports = app;
