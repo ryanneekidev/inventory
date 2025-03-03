@@ -13,7 +13,15 @@ app.set("view engine", "ejs");
 const itemsController = require('../controllers/itemsController');
 
 // Routes
-app.get('/', itemsController.getUsers);
+app.get('/', (req, res)=>{
+    if(req.query.category){
+        itemsController.getItemsByCategory(req, res)
+    }else if(req.query.itemId){
+        itemsController.getItemsById(req, res)
+    }else{
+        itemsController.getItems(req, res)
+    }
+});
 
 // Export router
 module.exports = app;

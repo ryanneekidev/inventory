@@ -7,6 +7,7 @@
     </head>
     <body>
         <h1>Items</h1>
+        <h2>Category: <%= category %></h2>
         <ul>
             <% items.map( item => { %>
                 <p> <%= item.name %> - $<%= (item.price)/100 %> </p>

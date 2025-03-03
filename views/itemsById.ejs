@@ -6,11 +6,11 @@
         </title>
     </head>
     <body>
-        <h1>Items</h1>
+        <h1>Item</h1>
         <ul>
             <% items.map( item => { %>
                 <p> <%= item.name %> - $<%= (item.price)/100 %> </p>
-                <button><a href='/items?itemId=<%= item.id %>'>Open</a></button>
+                <button><a href='/items'>Back</a></button>
             <% }) %>
         </ul>
     </body>

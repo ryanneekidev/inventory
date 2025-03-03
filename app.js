@@ -2,6 +2,13 @@
 const express = require('express');
 const app = express();
 
+// Node modules/utilities
+const path = require('node:path');
+
+// Setup EJS
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
 // Dotenv setup
 require('dotenv').config();
 
@@ -10,7 +17,7 @@ const itemsRouter = require('./routers/items');
 
 // Routes
 app.get('/', (req, res)=>{
-    res.status(200).send('Hello, World!')
+    res.status(200).render('index', {})
 });
 
 app.use('/items', itemsRouter);
