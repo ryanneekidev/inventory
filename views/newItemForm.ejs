@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add item</title>
+    </head>
+    <body>
+        <h1>Virtual store</h1>
+        <p>Add items to the store</p>
+        <form method="POST" action="/add">
+            <label for="itemName">Name</label>
+            <input type="text" placeholder="Enter item name" name="itemName" id="itemName" />
+            <label for="itemPrice">Price (in cents)</label>
+            <input type="number" placeholder="Enter item price" name="itemPrice" id="itemPrice">
+            <button type="submit">Add</button>
+        </form>
+    </body>
+</html>

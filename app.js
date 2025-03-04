@@ -9,11 +9,20 @@ const path = require('node:path');
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// POST requests config
+app.use(express.urlencoded({ extended: true }));
+
 // Dotenv setup
 require('dotenv').config();
 
 // Import routers
 const itemsRouter = require('./routers/items');
+
+// Import controllers
+const itemsController = require('./controllers/itemsController');
+
+// Import database queries
+const queries = require('./db/queries')
 
 // Routes
 app.get('/', (req, res)=>{
@@ -21,6 +30,20 @@ app.get('/', (req, res)=>{
 });
 
 app.use('/items', itemsRouter);
+
+app.get('/add', (req, res)=>{
+    res.status(200).render('newItemForm', {})
+})
+
+app.get('/edit', async (req, res)=>{
+    const items = await queries.getItemsById(Number(req.query.itemId));
+    const item = items[0];
+    res.status(200).render('editItem', {item: item})
+})
+
+app.post('/add', itemsController.addItem);
+
+app.post('/edit', itemsController.updateItem);
 
 // Start server
 app.listen(process.env.PORT || 3000, ()=>{

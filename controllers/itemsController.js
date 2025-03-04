@@ -18,8 +18,24 @@ async function getItemsById(req, res){
     res.status(200).render('itemsById', {items: items, category: 'All'})
 }
 
+async function addItem(req, res){
+    const info = req.body;
+    console.log(info);
+    await queries.addItem(info.itemName, info.itemPrice);
+    res.redirect('/')
+}
+
+async function updateItem(req, res){
+    const info = req.body;
+    console.log(info);
+    await queries.updateItem(Number(req.body.id), info.newItemName, info.newItemPrice);
+    res.redirect(`/items?itemId=${info.id}`)
+}
+
 module.exports = {
     getItems,
     getItemsByCategory,
-    getItemsById
+    getItemsById,
+    addItem,
+    updateItem
 }
