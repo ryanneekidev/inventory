@@ -21,7 +21,7 @@ async function getItemsById(req, res){
 async function addItem(req, res){
     const info = req.body;
     console.log(info);
-    await queries.addItem(info.itemName, info.itemPrice);
+    await queries.addItem(info.itemName, info.itemPrice, info.category);
     res.redirect('/')
 }
 

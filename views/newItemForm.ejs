@@ -11,6 +11,12 @@
             <input type="text" placeholder="Enter item name" name="itemName" id="itemName" />
             <label for="itemPrice">Price (in cents)</label>
             <input type="number" placeholder="Enter item price" name="itemPrice" id="itemPrice">
+            <label for="category">Category</label>
+            <select name="category" id="category">
+                <% categories.map(category => { %>
+                    <option value="<%= category.id %>"><%= category.name %></option>
+                <% }) %>
+            </select>
             <button type="submit">Add</button>
         </form>
     </body>

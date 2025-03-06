@@ -19,9 +19,14 @@ async function getItemsById(id){
     return rows
 }
 
-async function addItem(name, price){
+async function addItem(name, price, categoryId){
     const SQL = 'INSERT INTO items (name, price) VALUES ($1,$2)';
-    await pool.query(SQL, [name, price])
+    const SQL3 = 'SELECT * FROM items ORDER BY id DESC LIMIT 1';
+    const SQL2 = 'INSERT INTO item_categories_junction (item_id, category_id) VALUES ($1, $2)';
+    await pool.query(SQL, [name, price]);
+    const {rows} = await pool.query(SQL3);
+    const itemId = rows[0].id;
+    await pool.query(SQL2, [itemId, categoryId])
 }
 
 async function updateItem(id, name, price){
@@ -36,11 +41,18 @@ async function deleteItem(id){
     await pool.query(SQL2, [id])
 }
 
+async function getCategories(id){
+    const SQL = 'SELECT * FROM categories';
+    const {rows} = await pool.query(SQL);
+    return rows
+}
+
 module.exports = {
     getItems,
     getItemsByCategory,
     getItemsById,
     addItem,
     updateItem,
-    deleteItem
+    deleteItem,
+    getCategories
 }

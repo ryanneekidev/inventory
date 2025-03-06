@@ -31,8 +31,9 @@ app.get('/', (req, res)=>{
 
 app.use('/items', itemsRouter);
 
-app.get('/add', (req, res)=>{
-    res.status(200).render('newItemForm', {})
+app.get('/add', async (req, res)=>{
+    const categories = await queries.getCategories(); 
+    res.status(200).render('newItemForm', {categories: categories})
 })
 
 app.get('/edit', async (req, res)=>{
