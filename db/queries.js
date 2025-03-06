@@ -1,4 +1,3 @@
-const { get } = require('../routers/items');
 const pool = require('./pool');
 
 async function getItems(){
