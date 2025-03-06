@@ -11,9 +11,9 @@
             <label for="id" style="display: none;">ID</label>
             <input type="number" placeholder="id" name="id" id="id" value="<%= item.id %>" style="display: none"/>
             <label for="newItemName">New name</label>
-            <input type="text" placeholder="New item name" name="newItemName" id="newItemName" value="<%= item.name %>"/>
-            <label for="newItemPrice">New price</label>
-            <input type="number" placeholder="New item price" name="newItemPrice" id="newItemPrice" value="<%= item.price/100 %>"/>
+            <input type="text" placeholder="New item name" name="newItemName" id="newItemName" value="<%= item.name %>" step="any"/>
+            <label for="newItemPrice">New price (in cents)</label>
+            <input type="number" placeholder="New item price" name="newItemPrice" id="newItemPrice" value="<%= item.price %>"/>
             <button type="submit">Update</button>
         </form>
     </body>

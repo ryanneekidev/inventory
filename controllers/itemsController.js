@@ -28,8 +28,14 @@ async function addItem(req, res){
 async function updateItem(req, res){
     const info = req.body;
     console.log(info);
-    await queries.updateItem(Number(req.body.id), info.newItemName, info.newItemPrice);
+    await queries.updateItem(Number(req.body.id), info.newItemName, Number(info.newItemPrice));
     res.redirect(`/items?itemId=${info.id}`)
+}
+
+async function deleteItem(req, res){
+    const id = req.query.itemId;
+    await queries.deleteItem(Number(id))
+    res.redirect('/items')
 }
 
 module.exports = {
@@ -37,5 +43,6 @@ module.exports = {
     getItemsByCategory,
     getItemsById,
     addItem,
-    updateItem
+    updateItem,
+    deleteItem
 }

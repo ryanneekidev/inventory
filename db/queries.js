@@ -29,10 +29,18 @@ async function updateItem(id, name, price){
     await pool.query(SQL, [id, name, price])
 }
 
+async function deleteItem(id){
+    const SQL1 = 'DELETE FROM item_categories_junction WHERE item_id=$1';
+    const SQL2 = 'DELETE FROM items WHERE id=$1';
+    await pool.query(SQL1, [id]),
+    await pool.query(SQL2, [id])
+}
+
 module.exports = {
     getItems,
     getItemsByCategory,
     getItemsById,
     addItem,
-    updateItem
+    updateItem,
+    deleteItem
 }

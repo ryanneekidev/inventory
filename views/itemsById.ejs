@@ -12,6 +12,7 @@
                 <p> <%= item.name %> - $<%= (item.price)/100 %> </p>
                 <button><a href='/items'>Back</a></button>
                 <button><a href='/edit?itemId=<%= item.id %>'>Edit</a></button>
+                <button><a href='/delete?itemId=<%= item.id %>'>Delete</a></button>
             <% }) %>
         </ul>
     </body>

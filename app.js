@@ -45,6 +45,8 @@ app.post('/add', itemsController.addItem);
 
 app.post('/edit', itemsController.updateItem);
 
+app.get('/delete', itemsController.deleteItem);
+
 // Start server
 app.listen(process.env.PORT || 3000, ()=>{
     console.log('Server started at http://127.0.0.1:3000')
