@@ -28,7 +28,7 @@ async function addItem(req, res){
 async function updateItem(req, res){
     const info = req.body;
     console.log(info);
-    await queries.updateItem(Number(req.body.id), info.newItemName, Number(info.newItemPrice));
+    await queries.updateItem(Number(req.body.id), info.newItemName, Number(info.newItemPrice), info.category);
     res.redirect(`/items?itemId=${info.id}`)
 }
 

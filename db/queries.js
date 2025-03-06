@@ -29,9 +29,11 @@ async function addItem(name, price, categoryId){
     await pool.query(SQL2, [itemId, categoryId])
 }
 
-async function updateItem(id, name, price){
+async function updateItem(id, name, price, category_id){
     const SQL = 'UPDATE items SET name=$2, price=$3 WHERE id=$1';
-    await pool.query(SQL, [id, name, price])
+    const SQL2 = 'UPDATE item_categories_junction SET category_id=$2 WHERE item_id=$1';
+    await pool.query(SQL, [id, name, price]);
+    await pool.query(SQL2, [id, category_id])
 }
 
 async function deleteItem(id){
@@ -47,6 +49,18 @@ async function getCategories(id){
     return rows
 }
 
+async function getItemCategoryByItemId(id){
+    const SQL = 'SELECT item_id, category_id, name FROM item_categories_junction JOIN categories ON item_categories_junction.category_id = categories.id WHERE item_id=$1;'
+    const {rows} = await pool.query(SQL, [id]);
+    return rows;
+}
+
+async function getItemCategoryIdByItemId(id){
+    const SQL = 'SELECT item_categories_junction.item_id, item_categories_junction.category_id FROM items JOIN item_categories_junction ON items.id = item_categories_junction.item_id WHERE item_id=$1'
+    const {rows} = await pool.query(SQL, [id]);
+    return rows;
+}
+
 module.exports = {
     getItems,
     getItemsByCategory,
@@ -54,5 +68,7 @@ module.exports = {
     addItem,
     updateItem,
     deleteItem,
-    getCategories
+    getCategories,
+    getItemCategoryByItemId,
+    getItemCategoryIdByItemId
 }

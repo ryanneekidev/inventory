@@ -14,6 +14,16 @@
             <input type="text" placeholder="New item name" name="newItemName" id="newItemName" value="<%= item.name %>" step="any"/>
             <label for="newItemPrice">New price (in cents)</label>
             <input type="number" placeholder="New item price" name="newItemPrice" id="newItemPrice" value="<%= item.price %>"/>
+            <label for="category">Category</label>
+            <select name="category" id="category">
+                <% categories.map(category => { %>
+                    <% if(category.name === itemCategory){ %>
+                        <option value="<%= category.id %>" selected><%= category.name %></option>
+                    <% }else{ %>
+                        <option value="<%= category.id %>"><%= category.name %></option>
+                    <% } %>
+                <% }) %>
+            </select>
             <button type="submit">Update</button>
         </form>
     </body>

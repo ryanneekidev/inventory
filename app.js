@@ -39,7 +39,10 @@ app.get('/add', async (req, res)=>{
 app.get('/edit', async (req, res)=>{
     const items = await queries.getItemsById(Number(req.query.itemId));
     const item = items[0];
-    res.status(200).render('editItem', {item: item})
+    const rows = await queries.getItemCategoryByItemId(item.id);
+    const category = rows[0].name;
+    const categories = await queries.getCategories();
+    res.status(200).render('editItem', {item: item, categories: categories, itemCategory: category})
 })
 
 app.post('/add', itemsController.addItem);
